@@ -161,10 +161,13 @@ A1 − A0 の平均差を確認する。計画（docs/gate1_verdict.md §手順2
 - A0 / A1 を追加2シード（例: 43, 44）で各40ステップ＋評価
   → `SEED` 環境変数で切り替える。τ は §4.1 の値を共通使用
 - 公正な A2 を1シード: τ を Δ_t 自身の分布で再較正してから実行する
-  （ゲート1の A2 は ℓ 用の τ を流用したため重みが崩壊した。再較正用の
-  較正は `calibrate_tau.py` の信号を Δ に替えて行う必要があり、この
-  パッケージにはまだ含まれていない — 実装する場合は設計ドキュメントに
-  追記してから行うこと）
+  （ゲート1の A2 は ℓ 用の τ を流用したため重みが崩壊した）。手順は
+  `harness/calibrate_tau_delta.py`（約8分）で、ルールは
+  [docs/fair_a2_calibration.md](docs/fair_a2_calibration.md) に事前登録済み:
+  プールした Δ に対する `exp(−Δ/τ)` の ESS 比率が A1 の Gate 1 平均
+  0.479 になる τ を推奨 τ とする。出力
+  `gate1_out/tau_calibration_delta.json` の `recommended_tau` を使って
+  `SEED=43 bash scripts/run_arm.sh A2 sampled <recommended_tau> 40 2 4 steps 1`
 - 所要: 1条件 約2時間09分（学習 6,389秒＋評価 1,362秒、A1S 実測）×
   5条件 ≈ **約10時間45分** ＋ 較正・プローブ分。API 費用なし
 - 読み取り: シード平均の A1 − A0。A2 が再び完走できない場合は
@@ -191,6 +194,7 @@ A1 − A0 の平均差を確認する。計画（docs/gate1_verdict.md §手順2
 - [docs/gate1_results.md](docs/gate1_results.md) — ゲート1全実測（逸脱記録を含む）
 - [docs/gate1_verdict.md](docs/gate1_verdict.md) / [docs/shuffle_verdict.md](docs/shuffle_verdict.md) — 判定
 - [docs/falsification.md](docs/falsification.md) — 新規性の反証記録
+- [docs/fair_a2_calibration.md](docs/fair_a2_calibration.md) — 公正な A2 の τ 再較正ルール（事前登録）
 
 ## 9. 出典
 

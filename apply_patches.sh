@@ -24,7 +24,7 @@ PY="${PYTHON:-python3}"
   echo "opsd/opsd_trainer.py not found - clone OPSD first (see README section 2)"
   exit 1
 }
-cp harness/gate1_common.py harness/eval_harness.py harness/calibrate_tau.py harness/avsd_diag.py "$OPSD_DIR/"
+cp harness/gate1_common.py harness/eval_harness.py harness/calibrate_tau.py harness/calibrate_tau_delta.py harness/avsd_diag.py "$OPSD_DIR/"
 cp harness/check_data.py ./
 for p in patch_opsd.py patch_opsd2.py patch_opsd3.py patch_opsd4.py patch_opsd5.py patch_opsd6.py patch_opsd_shuffle.py patch_opsd_shuffle_fix.py; do
   echo "== $p"

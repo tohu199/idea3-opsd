@@ -62,6 +62,8 @@ def main():
         "frac_ell_eq_0": float((pooled == 0).float().mean()),
         "wall_seconds": time.time() - t0,
     }
+    OUT.parent.mkdir(parents=True, exist_ok=True)  # gate1_out is otherwise
+    # only created by run_arm.sh, which runs after this calibration (README §4.1)
     OUT.write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2))
     print(f"TAU={result['tau']:.6e}  saved to {OUT}")

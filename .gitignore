@@ -1,0 +1,9 @@
+.venv/
+opsd/
+hf-cache/
+gate1_out/
+logs/
+smoke_out/
+__pycache__/
+*.orig_gate1
+/check_data.py
